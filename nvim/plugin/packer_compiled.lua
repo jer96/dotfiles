@@ -69,9 +69,29 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  LuaSnip = {
+    loaded = true,
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/LuaSnip"
+  },
   ["barbar.nvim"] = {
     loaded = true,
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/barbar.nvim"
+  },
+  ["cmp-buffer"] = {
+    loaded = true,
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/cmp-buffer"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
+  },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/cmp-path"
+  },
+  cmp_luasnip = {
+    loaded = true,
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/cmp_luasnip"
   },
   coq_nvim = {
     loaded = true,
@@ -81,9 +101,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/gruvbox.nvim"
   },
-  kommentary = {
+  ["lspkind-nvim"] = {
     loaded = true,
-    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/kommentary"
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/lspkind-nvim"
   },
   ["lush.nvim"] = {
     loaded = true,
@@ -92,6 +112,10 @@ _G.packer_plugins = {
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
+  },
+  ["nvim-cmp"] = {
+    loaded = true,
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/nvim-cmp"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -124,6 +148,14 @@ _G.packer_plugins = {
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ["vim-commentary"] = {
+    loaded = true,
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/vim-commentary"
+  },
+  ["vim-vsnip"] = {
+    loaded = true,
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/vim-vsnip"
   }
 }
 

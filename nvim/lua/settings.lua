@@ -5,11 +5,12 @@ vim.o.hlsearch=false -- set highlight on search
 vim.o.mouse='a' -- enable mouse mode
 vim.o.ignorecase=true -- case insensitive search unless /C
 vim.o.wrap=false -- turn of word wrap
+vim.o.completeopt='menuone,noselect' -- set for better completion experience
 
 -- indentation
-vim.o.tabstop=4
-vim.o.softtabstop=4
-vim.o.shiftwidth=4
+vim.o.tabstop=2
+vim.o.softtabstop=2
+vim.o.shiftwidth=2
 vim.o.expandtab=true
 vim.o.smarttab=true
 vim.o.autoindent=true

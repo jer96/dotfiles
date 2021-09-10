@@ -29,13 +29,26 @@ return require('packer').startup(function ()
     use 'kyazdani42/nvim-tree.lua' -- simple file tree
     use 'neovim/nvim-lspconfig' -- configs for built in LSPs
     use { 'ms-jpq/coq_nvim', branch = 'coq'} -- completion
+    use {
+      "hrsh7th/nvim-cmp",
+      requires = {
+        "hrsh7th/vim-vsnip",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-path",
+        "onsails/lspkind-nvim",
+        "saadparwaiz1/cmp_luasnip",
+      }
+    }
+    use 'L3MON4D3/LuaSnip' -- Snippets plugin
     use {'npxbr/gruvbox.nvim', requires = {"rktjmp/lush.nvim"}}
     use 'nvim-telescope/telescope.nvim'
     use 'windwp/nvim-autopairs'
-    use 'b3nj5m1n/kommentary'
+    use 'tpope/vim-commentary'
     use 'romgrk/barbar.nvim'
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
+
 end)

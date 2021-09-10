@@ -2,13 +2,13 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 -- Move to previous/next
-map('n', '˙', ':BufferPrevious<CR>', opts)
-map('n', '¬', ':BufferNext<CR>', opts)
+map('n', '<s-tab>', ':BufferPrevious<CR>', opts)
+map('n', '<tab>', ' :BufferNext<CR>', opts)
+
+--[[ map('n', '<s-tab>', ':BufferMovePrevious<CR>', opts)
+map('n', '<tab>', ' :BufferMoveNext<CR>', opts) ]]
 
 -- TODO fix all comamnds with "A" for alt
--- Re-order to previous/next
-map('n', '<A-<>', ':BufferMovePrevious<CR>', opts)
-map('n', '<A->>', ' :BufferMoveNext<CR>', opts)
 -- Goto buffer in position...
 map('n', '<A-1>', ':BufferGoto 1<CR>', opts)
 map('n', '<A-2>', ':BufferGoto 2<CR>', opts)
