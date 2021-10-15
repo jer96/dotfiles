@@ -1,13 +1,8 @@
 -- luasnip setup
 local luasnip = require 'luasnip'
 
--- nice symboles for menu
+-- nice symbols for menu
 local lspkind = require('lspkind')
-
-local check_back_space = function()
-  local col = vim.fn.col('.') - 1
-  return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
-end
 
 -- nvim-cmp setup
 local cmp = require 'cmp'

@@ -93,10 +93,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/cmp_luasnip"
   },
-  coq_nvim = {
-    loaded = true,
-    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/coq_nvim"
-  },
   ["gruvbox.nvim"] = {
     loaded = true,
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/gruvbox.nvim"

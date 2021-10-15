@@ -28,7 +28,6 @@ return require('packer').startup(function ()
     use 'kyazdani42/nvim-web-devicons' -- better file icons
     use 'kyazdani42/nvim-tree.lua' -- simple file tree
     use 'neovim/nvim-lspconfig' -- configs for built in LSPs
-    use { 'ms-jpq/coq_nvim', branch = 'coq'} -- completion
     use {
       "hrsh7th/nvim-cmp",
       requires = {
