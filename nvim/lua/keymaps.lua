@@ -14,3 +14,9 @@ vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', opts)
 -- move current line with option-j/k
 vim.api.nvim_set_keymap('n', '∆', '<Esc>:m .+1<CR>==', opts)
 vim.api.nvim_set_keymap('n', '˚', '<Esc>:m .-2<CR>==', opts)
+
+-- increase/decrease window size
+vim.api.nvim_set_keymap('n', '–', ':vert res -3<CR>', opts)
+vim.api.nvim_set_keymap('n', '≠', ':vert res +3<CR>', opts)
+vim.api.nvim_set_keymap('n', '—', ':res -3<CR>', opts)
+vim.api.nvim_set_keymap('n', '±', ':res +3<CR>', opts)

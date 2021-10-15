@@ -28,7 +28,7 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Enable the following language servers
-local servers = { 'clangd', 'pyright', 'pylsp', 'tsserver' }
+local servers = { 'pyright', 'pylsp', 'tsserver' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -36,6 +36,13 @@ for _, lsp in ipairs(servers) do
     debounce_text_changes = 150,
   }
 end
+
+-- custom clang config
+nvim_lsp['clangd'].setup {
+  on_attach = on_attach,
+  cmd = { "clangd", "--background-index", "--clang-tidy" },
+  root_dir = function() return vim.loop.cwd() end
+}
 
 -- Example custom server
 local sumneko_root_path = vim.fn.getenv 'HOME' .. '/.config/lsp/lua-language-server'

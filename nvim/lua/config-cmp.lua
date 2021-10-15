@@ -45,29 +45,18 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
     ['<Tab>'] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
-      elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
-      elseif check_back_space() then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Tab>', true, true, true), 'n')
+      if cmp.visible() then
+        cmp.select_next_item();
       else
-        -- fallback()
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-Space>'))
+        fallback();
       end
     end,
     ['<S-Tab>'] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
-      elseif luasnip.jumpable(-1) then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+      if cmp.visible() then
+        cmp.select_prev_item();
       else
-        fallback()
+        fallback();
       end
     end,
   },
@@ -79,7 +68,9 @@ cmp.setup {
 }
 
 local npairs = require('nvim-autopairs')
-npairs.setup({ map_bs = false })
+npairs.setup({
+  disable_filetype = {"TelescopePrompt", "vim"}
+})
 -- you need setup cmp first put this after cmp.setup()
 require("nvim-autopairs.completion.cmp").setup({
   map_cr = true, --  map <CR> on insert mode
