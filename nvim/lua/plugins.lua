@@ -44,10 +44,11 @@ return require('packer').startup(function ()
     use 'nvim-telescope/telescope.nvim'
     use 'windwp/nvim-autopairs'
     use 'tpope/vim-commentary'
-    use 'romgrk/barbar.nvim'
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
-
+    use 'lewis6991/gitsigns.nvim'
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use {'akinsho/bufferline.nvim'}
 end)

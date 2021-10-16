@@ -73,9 +73,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/LuaSnip"
   },
-  ["barbar.nvim"] = {
+  ["bufferline.nvim"] = {
     loaded = true,
-    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/barbar.nvim"
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/bufferline.nvim"
   },
   ["cmp-buffer"] = {
     loaded = true,
@@ -92,6 +92,10 @@ _G.packer_plugins = {
   cmp_luasnip = {
     loaded = true,
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/cmp_luasnip"
+  },
+  ["gitsigns.nvim"] = {
+    loaded = true,
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
   ["gruvbox.nvim"] = {
     loaded = true,
@@ -140,6 +144,10 @@ _G.packer_plugins = {
   ["popup.nvim"] = {
     loaded = true,
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/popup.nvim"
+  },
+  ["telescope-fzf-native.nvim"] = {
+    loaded = true,
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,

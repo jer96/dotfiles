@@ -18,21 +18,22 @@ cmp.setup {
   documentation = {
     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
   },
-  formatting = {
-    format = function(entry, vim_item)
-      vim_item.kind = lspkind.presets.default[vim_item.kind]
-      vim_item.menu = ({
-        nvim_lsp = "(LSP)",
-        path = "(Path)",
-        luasnip = "(Snippet)",
-      })[entry.source.name]
-      vim_item.dup = ({
-        path = 1,
-        nvim_lsp = 0,
-      })[entry.source.name] or 0
-      return vim_item
-    end
-  },
+  formatting = {format = lspkind.cmp_format({with_text = true, maxwidth =  50})},
+  -- formatting = {
+  --   format = function(entry, vim_item)
+  --     vim_item.kind = lspkind.presets.default[vim_item.kind]
+  --     vim_item.menu = ({
+  --       nvim_lsp = "(LSP)",
+  --       path = "(Path)",
+  --       luasnip = "(Snippet)",
+  --     })[entry.source.name]
+  --     vim_item.dup = ({
+  --       path = 1,
+  --       nvim_lsp = 0,
+  --     })[entry.source.name] or 0
+  --     return vim_item
+  --   end
+  -- },
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -40,20 +41,20 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<Tab>'] = function(fallback)
+    ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item();
       else
         fallback();
       end
-    end,
-    ['<S-Tab>'] = function(fallback)
+    end, {'i', 's'}),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item();
       else
         fallback();
       end
-    end,
+    end, {'i', 's'}),
   },
   sources = {
     { name = 'nvim_lsp' },
@@ -72,3 +73,5 @@ require("nvim-autopairs.completion.cmp").setup({
   map_complete = true, -- it will auto insert `(` after select function or method item
   auto_select = true -- automatically select the first item
 })
+
+vim.cmd("autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }")

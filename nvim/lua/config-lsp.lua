@@ -25,7 +25,7 @@ local on_attach = function(_, bufnr)
 end
 
 -- nvim-cmp supports additional completion capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable the following language servers
 local servers = { 'pyright', 'pylsp', 'tsserver' }
@@ -37,9 +37,10 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- custom clang config
+-- custom clangd config
 nvim_lsp['clangd'].setup {
   on_attach = on_attach,
+  capabilities = capabilities,
   cmd = { "clangd", "--background-index", "--clang-tidy" },
   root_dir = function() return vim.loop.cwd() end
 }
