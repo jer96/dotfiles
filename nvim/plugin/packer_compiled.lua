@@ -93,6 +93,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/cmp_luasnip"
   },
+  ["format.nvim"] = {
+    loaded = true,
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/format.nvim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"

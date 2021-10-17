@@ -51,4 +51,5 @@ return require('packer').startup(function ()
     use 'lewis6991/gitsigns.nvim'
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use {'akinsho/bufferline.nvim'}
+    use {'lukas-reineke/format.nvim'}
 end)
