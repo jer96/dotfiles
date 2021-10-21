@@ -12,43 +12,18 @@ require"format".setup {
         {
             cmd = {
                 function(file)
-                    return string.format(
-                               "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb %s",
-                               file)
+                    return string.format("lua-format -i --column-limit=125 --break-after-table-lb %s", file)
                 end
             },
             tempfile_postfix = ".tmp"
         }
     },
-    python = {
-        {
-            cmd = {
-                function(file)
-                    return string.format("black --quiet %s", file)
-                end
-            },
-            tempfile_postfix = ".tmp"
-        }
-    },
+    python = {{cmd = {function(file) return string.format("black --quiet %s", file) end}, tempfile_postfix = ".tmp"}},
     c = {
-        {
-            cmd = {
-                function(file)
-                    return string.format("clang-format -i --style=llvm %s", file)
-                end
-            },
-            tempfile_postfix = ".tmp"
-        }
+        {cmd = {function(file) return string.format("clang-format -i --style=llvm %s", file) end}, tempfile_postfix = ".tmp"}
     },
     cpp = {
-        {
-            cmd = {
-                function(file)
-                    return string.format("clang-format -i --style=llvm %s", file)
-                end
-            },
-            tempfile_postfix = ".tmp"
-        }
+        {cmd = {function(file) return string.format("clang-format -i --style=llvm %s", file) end}, tempfile_postfix = ".tmp"}
     },
     -- vim = {
     --     {
@@ -67,7 +42,9 @@ require"format".setup {
     --         }
     --     }
     -- },
-    markdown = {{cmd = {"prettier -w"}}, {cmd = {"black"}, start_pattern = "^```python$", end_pattern = "^```$", target = "current"}}
+    markdown = {
+        {cmd = {"prettier -w"}}, {cmd = {"black"}, start_pattern = "^```python$", end_pattern = "^```$", target = "current"}
+    }
 }
 
 vim.cmd('autocmd BufWritePost * FormatWrite')

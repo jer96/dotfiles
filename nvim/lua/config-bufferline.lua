@@ -2,9 +2,7 @@ require("bufferline").setup {
     options = {
         max_name_length = 25,
         max_prefix_length = 20,
-        name_formatter = function(buf)
-            return vim.fn.fnamemodify(buf.name, ':t:r')
-        end,
+        name_formatter = function(buf) return vim.fn.fnamemodify(buf.name, ':t:r') end,
         diagnostic = 'nvim_lsp',
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
             local icon = level:match("error") and " " or " "
