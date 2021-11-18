@@ -35,6 +35,9 @@ for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {on_attach = on_attach, capabilities = capabilities, debounce_text_changes = 150}
 end
 
+-- custom perl config
+require'lspconfig'.perlpls.setup({on_attach = on_attach, capabilities = capabilities})
+
 -- custom clangd config
 nvim_lsp['clangd'].setup {
     on_attach = on_attach,

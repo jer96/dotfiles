@@ -1,5 +1,4 @@
 vim.g.nvim_tree_quit_on_open = 0
-vim.g.nvim_tree_ignore = {'*.tmp', '.git', 'node_modules', '.cache'}
 vim.g.nvim_tree_indent_markers = 1
 vim.api.nvim_set_keymap('n', '<Leader>t', ":NvimTreeToggle<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<Leader>r', ":NvimTreeRefresh<CR>", {noremap = true, silent = true})
@@ -51,7 +50,7 @@ nvim_tree.setup {
         -- the command arguments as a list
         args = {}
     },
-
+    filters = {dotfiles = false, custom = {'*.tmp', '.git', 'node_modules', '.cache'}},
     view = {
         -- width of the window, can be either a number (columns) or a string in `%`, for left or right side placement
         width = 30,
