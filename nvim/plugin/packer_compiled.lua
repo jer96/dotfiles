@@ -124,6 +124,11 @@ _G.packer_plugins = {
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
     url = "https://github.com/onsails/lspkind-nvim"
   },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
   ["lush.nvim"] = {
     loaded = true,
     path = "/Users/jeremiahbill/.local/share/nvim/site/pack/packer/start/lush.nvim",
