@@ -23,7 +23,12 @@ require"format".setup {
         {cmd = {function(file) return string.format("clang-format -i --style=llvm %s", file) end}, tempfile_postfix = ".tmp"}
     },
     cpp = {
-        {cmd = {function(file) return string.format("clang-format -i --style=llvm %s", file) end}, tempfile_postfix = ".tmp"}
+        {
+            cmd = {function(file)
+                return string.format("clang-format -i --style=llvm --sort-includes=false %s", file)
+            end},
+            tempfile_postfix = ".tmp"
+        }
     },
     -- vim = {
     --     {

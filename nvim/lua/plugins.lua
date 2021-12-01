@@ -32,7 +32,8 @@ return require('packer').startup(function()
         }
     }
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
-    use {'npxbr/gruvbox.nvim', requires = {"rktjmp/lush.nvim"}}
+    use 'EdenEast/nightfox.nvim'
+    use {'gruvbox-community/gruvbox'}
     use 'nvim-telescope/telescope.nvim'
     use 'windwp/nvim-autopairs'
     use 'tpope/vim-commentary'
