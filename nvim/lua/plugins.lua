@@ -45,4 +45,7 @@ return require('packer').startup(function()
     use {'davidgranstrom/nvim-markdown-preview'}
     use 'famiu/bufdelete.nvim'
     use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
+    use 'norcalli/nvim-colorizer.lua'
+    use 'mfussenegger/nvim-jdtls'
+
 end)
