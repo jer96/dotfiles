@@ -47,5 +47,6 @@ return require('packer').startup(function()
     use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
     use 'norcalli/nvim-colorizer.lua'
     use 'mfussenegger/nvim-jdtls'
+    use {'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end}
 
 end)

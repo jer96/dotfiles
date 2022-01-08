@@ -55,8 +55,8 @@ require('lualine').setup {
         lualine_b = {{'filename', file_status = false, path = 1}, 'filesize'},
         lualine_c = {},
         lualine_x = {},
-        lualine_y = {{'diagnostics', sources = {'nvim_diagnostic'}}},
-        lualine_z = {'branch', 'diff'}
+        lualine_y = {{'diagnostics', sources = {'nvim_diagnostic'}}, 'diff'},
+        lualine_z = {'branch'}
     },
     inactive_sections = {
         lualine_a = {},
