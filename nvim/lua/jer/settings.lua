@@ -1,15 +1,13 @@
-vim.cmd('filetype plugin indent on')
-vim.o.completeopt = 'menuone,noselect' -- set for better completion experience
-vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.cmd("filetype plugin indent on")
+vim.o.completeopt = "menuone,noselect" -- set for better completion experience
+vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.hidden = true
-vim.o.whichwrap = 'b,s,<,>,[,],h,l'
+vim.o.whichwrap = "b,s,<,>,[,],h,l"
 vim.o.pumheight = 10
 vim.o.fileencoding = "utf-8"
 vim.o.cmdheight = 1
 vim.o.splitbelow = true
-vim.o.termguicolors = true
 vim.o.splitright = true
-vim.opt.termguicolors = true
 vim.o.conceallevel = 0
 vim.o.showtabline = 1
 vim.o.showmode = false
@@ -20,15 +18,16 @@ vim.o.updatetime = 50
 vim.o.clipboard = "unnamedplus"
 vim.o.hlsearch = false
 vim.o.ignorecase = true
-vim.o.scrolloff = 5
-vim.o.sidescrolloff = 1
+vim.o.scrolloff = 8
+vim.o.sidescrolloff = 8
 vim.o.mouse = "a"
 
--- vim.wo.wrap = false
+vim.wo.wrap = false
 vim.wo.number = true
 vim.wo.relativenumber = true -- relative line numbers
 vim.wo.cursorline = true
 vim.wo.signcolumn = "yes"
+vim.o.fcs = vim.o.fcs .. "eob: "
 
 vim.o.tabstop = 2
 vim.bo.tabstop = 2
@@ -44,6 +43,10 @@ vim.o.smarttab = true
 vim.o.smartindent = true
 vim.o.breakindent = true
 vim.o.copyindent = true
+
+-- nvimtree
+vim.g.nvim_tree_quit_on_open = 0
+vim.g.nvim_tree_indent_markers = 1
 
 -- Disable various builtin plugins in Vim that bog down speed
 vim.g.loaded_matchparen = 1
