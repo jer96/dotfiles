@@ -1,8 +1,8 @@
 -- LSP settings
-local nvim_lsp = require("lspconfig")
-local on_attach = function(_, bufnr)
-	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+local M = {}
 
+local function lsp_keymaps(bufnr)
+	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 	local opts = { noremap = true, silent = true }
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
@@ -41,69 +41,25 @@ local on_attach = function(_, bufnr)
 	)
 end
 
+M.setup = function() -- diagnostics
+	local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+
+	for type, icon in pairs(signs) do
+		local hl = "DiagnosticSign" .. type
+		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+	end
+
+	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+		underline = true,
+		virtual_text = { spacing = 5, severity_limit = "Warning" },
+	})
+end
+
+M.on_attach = function(_, bufnr)
+	lsp_keymaps(bufnr)
+end
+
 -- nvim-cmp supports additional completion capabilities
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+M.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
--- Enable the following language servers
-local servers = { "pyright", "pylsp", "tsserver" }
-for _, lsp in ipairs(servers) do
-	nvim_lsp[lsp].setup({ on_attach = on_attach, capabilities = capabilities, debounce_text_changes = 150 })
-end
-
--- custom clangd config
-nvim_lsp["clangd"].setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	cmd = { "clangd", "--background-index", "--clang-tidy" },
-	root_dir = function()
-		return vim.loop.cwd()
-	end,
-})
-
--- Example custom server
-local sumneko_root_path = vim.fn.getenv("HOME") .. "/.config/lsp/lua-language-server"
-local sumneko_binary = sumneko_root_path .. "/bin/macOS/lua-language-server"
-
--- Make runtime files discoverable to the server
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-require("lspconfig").sumneko_lua.setup({
-	cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			runtime = {
-				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-				version = "LuaJIT",
-				-- Setup your lua path
-				path = runtime_path,
-			},
-			diagnostics = {
-				-- Get the language server to recognize the `vim` global
-				globals = { "vim" },
-			},
-			workspace = {
-				-- Make the server aware of Neovim runtime files
-				library = vim.api.nvim_get_runtime_file("", true),
-			},
-			-- Do not send telemetry data containing a randomized but unique identifier
-			telemetry = { enable = false },
-		},
-	},
-})
-
--- diagnostics
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	underline = true,
-	virtual_text = { spacing = 5, severity_limit = "Warning" },
-})
+return M

@@ -27,6 +27,7 @@ return require("packer").startup(function()
 	use("kyazdani42/nvim-web-devicons") -- better file icons
 	use("kyazdani42/nvim-tree.lua") -- simple file tree
 	use("neovim/nvim-lspconfig") -- configs for built in LSPs
+	use("williamboman/nvim-lsp-installer")
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
