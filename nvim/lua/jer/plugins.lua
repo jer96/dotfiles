@@ -22,6 +22,7 @@ local use = require("packer").use
 
 return require("packer").startup(function()
 	use("wbthomason/packer.nvim")
+	use("folke/which-key.nvim")
 	use("nvim-lua/popup.nvim")
 	use("nvim-lua/plenary.nvim")
 	use("kyazdani42/nvim-web-devicons") -- better file icons

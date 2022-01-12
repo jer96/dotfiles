@@ -14,7 +14,7 @@ vim.o.showmode = false
 vim.o.backup = false
 vim.o.writebackup = false
 vim.o.updatetime = 50
--- vim.o.timeoutlen = 100
+vim.o.timeoutlen = 400
 vim.o.clipboard = "unnamedplus"
 vim.o.hlsearch = false
 vim.o.ignorecase = true
@@ -22,7 +22,7 @@ vim.o.scrolloff = 8
 vim.o.sidescrolloff = 8
 vim.o.mouse = "a"
 
-vim.wo.wrap = false
+vim.wo.wrap = true
 vim.wo.number = true
 vim.wo.relativenumber = true -- relative line numbers
 vim.wo.cursorline = true

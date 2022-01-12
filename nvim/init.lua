@@ -11,6 +11,7 @@ if vim.fn.exists("g:started_by_firenvim") == 0 then
 	require("jer.gitsigns")
 	require("jer.bufferline")
 	require("jer.lualine")
+	require("jer.which-key")
 else
 	require("firenvim")
 end
