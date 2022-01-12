@@ -12,6 +12,7 @@ if vim.fn.exists("g:started_by_firenvim") == 0 then
 	require("jer.bufferline")
 	require("jer.lualine")
 	require("jer.which-key")
+	require("jer.alpha")
 else
 	require("firenvim")
 end

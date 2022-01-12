@@ -53,7 +53,7 @@ require("lualine").setup({
 		theme = custom_gruvbox,
 		section_separators = "",
 		component_separators = { left = "|", right = "" },
-		disabled_filetypes = { "NvimTree" },
+		disabled_filetypes = { "NvimTree", "alpha" },
 		fmt = string.lower,
 		always_divide_middle = true,
 	},
