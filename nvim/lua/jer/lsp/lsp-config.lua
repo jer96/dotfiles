@@ -42,7 +42,7 @@ local function lsp_keymaps(bufnr)
 end
 
 M.setup = function() -- diagnostics
-	local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+	local signs = { Error = " ", Warn = " ", Hint = "ﯦ ", Info = " " }
 
 	for type, icon in pairs(signs) do
 		local hl = "DiagnosticSign" .. type

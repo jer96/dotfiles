@@ -18,6 +18,7 @@ require("nvim-treesitter.configs").setup({
 		"cmake",
 		"yaml",
 		"perl",
+		"markdown",
 	},
 	incremental_selection = {
 		enable = true,

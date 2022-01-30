@@ -5,6 +5,7 @@ end
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
 	on_attach = function(client)
@@ -25,5 +26,7 @@ null_ls.setup({
 			filetypes = { "c", "cpp", "cs" },
 			extra_args = { "--style", "llvm" },
 		}),
+		formatting.codespell.with({ fileTypes = { "markdown", "txt" } }),
+		diagnostics.codespell.with({ fileTypes = { "markdown", "txt" } }),
 	},
 })

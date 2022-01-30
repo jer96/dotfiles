@@ -16,6 +16,12 @@ lsp_installer.on_server_ready(function(server)
 		opts.on_attach = clangd_opts.on_attach
 	end
 
+	if server.name == "pyright" or server.name == "pylsp" then
+		local clangd_opts = require("jer.lsp.settings.python")
+		opts = vim.tbl_deep_extend("force", clangd_opts, opts)
+		opts.on_attach = clangd_opts.on_attach
+	end
+
 	if server.name == "sumneko_lua" then
 		local sumneko_opts = require("jer.lsp.settings.sumneko_lua")
 		opts = vim.tbl_deep_extend("force", sumneko_opts, opts)

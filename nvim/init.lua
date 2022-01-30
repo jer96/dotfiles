@@ -13,6 +13,7 @@ if vim.fn.exists("g:started_by_firenvim") == 0 then
 	require("jer.lualine")
 	require("jer.which-key")
 	require("jer.alpha")
+	require("jer.distant")
 else
 	require("firenvim")
 end

@@ -62,4 +62,6 @@ return require("packer").startup(function()
 		end,
 	})
 	use({ "jose-elias-alvarez/null-ls.nvim" })
+	use({ "tpope/vim-fugitive" })
+	use({ "chipsenkbeil/distant.nvim" })
 end)
