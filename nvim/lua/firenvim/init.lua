@@ -1,8 +1,13 @@
-vim.cmd([[
-    function! OnUIEnter(event) abort
-      if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
-        set guifont=JetBrains_Mono:h26
-      endif
-    endfunction
-    autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
-  ]])
+-- vim.g.firenvim_config = {
+--     globalSettings = { alt = "all" },
+--     localSettings = {
+--         [".*"] = {
+--             cmdline  = "neovim",
+--             content  = "text",
+--             priority = 0,
+--             selector = "textarea",
+--             takeover = "always"
+--         }
+--     }
+-- }
+-- vim.cmd([[set guifont=JetBrains_Mono:h18]])

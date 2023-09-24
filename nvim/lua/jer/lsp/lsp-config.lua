@@ -60,6 +60,6 @@ M.on_attach = function(_, bufnr)
 end
 
 -- nvim-cmp supports additional completion capabilities
-M.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 return M
