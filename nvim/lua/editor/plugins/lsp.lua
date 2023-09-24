@@ -35,11 +35,11 @@ return {
             nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
             nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
                 '[W]orkspace [S]ymbols')
+            nmap('<leader>e', vim.diagnostic.open_float, 'Show line diagnostic')
 
             -- See `:help K` for why this keymap
             nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
             nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-            nmap('<leader>e', vim.diagnostic.open_float, 'Show line diagnostic')
 
             -- Lesser used LSP functionality
             nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')

@@ -39,34 +39,45 @@ vim.api.nvim_set_keymap("n", "∑", ":Bdelete<CR>", opts)
 vim.api.nvim_set_keymap("n", "<Leader>t", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>r", ":NvimTreeRefresh<CR>", { noremap = true, silent = true })
 
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+    callback = function ()
+        vim.highlight.on_yank()
+    end,
+    group = highlight_group,
+    pattern = '*',
+})
+
 -- telescope
 vim.api.nvim_set_keymap(
-	"n",
-	"<leader><space>",
-	[[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]],
-	opts
+    "n",
+    "<leader><space>",
+    [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]],
+    opts
 )
 vim.api.nvim_set_keymap("n", "<leader>fo", [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], opts)
 vim.api.nvim_set_keymap(
-	"n",
-	"<leader>gg",
-	[[<cmd>lua require('telescope.builtin').git_files({show_untracked = false})<CR>]],
-	opts
+    "n",
+    "<leader>gg",
+    [[<cmd>lua require('telescope.builtin').git_files({show_untracked = false})<CR>]],
+    opts
 )
 vim.api.nvim_set_keymap("n", "<leader>fb", [[<cmd>lua require('telescope.builtin').buffers()<CR>]], opts)
 vim.api.nvim_set_keymap("n", "<leader>fh", [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], opts)
 vim.api.nvim_set_keymap(
-	"n",
-	"<leader>bz",
-	[[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]],
-	opts
+    "n",
+    "<leader>bz",
+    [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]],
+    opts
 )
 vim.api.nvim_set_keymap("n", "<leader>st", [[<cmd>lua require('telescope.builtin').tags()<CR>]], opts)
 vim.api.nvim_set_keymap(
-	"n",
-	"<leader>so",
-	[[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]],
-	opts
+    "n",
+    "<leader>so",
+    [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]],
+    opts
 )
 -- brew install fd
 vim.api.nvim_set_keymap("n", "<leader>fs", [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], opts)
