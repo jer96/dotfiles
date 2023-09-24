@@ -27,4 +27,3 @@ vim.cmd([[
   set termguicolors
   colorscheme gruvbox
 ]])
-require("colorizer").setup()
