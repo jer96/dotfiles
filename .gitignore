@@ -1,5 +1,5 @@
-/gh
-/lsp
-/iterm2
-.DS_STORE
-plugin/
+*
+
+aerospace.toml
+!.config/
+!.config/**
