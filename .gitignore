@@ -1,5 +1,8 @@
 *
 
-aerospace.toml
+!aerospace.toml
 !.config/
 !.config/**
+!.warp/
+!.warp/**
+!.warp/keybindings.yaml

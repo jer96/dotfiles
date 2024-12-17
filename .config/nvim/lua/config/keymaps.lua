@@ -5,6 +5,15 @@ vim.api.nvim_set_keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- alpha
+vim.api.nvim_set_keymap("n", "<Leader>al", ":Alpha<CR>", opts)
+
+-- quit and save
+vim.api.nvim_set_keymap("n", "<Leader>qq", ":qall<CR>", opts)
+vim.api.nvim_set_keymap("n", "<Leader>qqq", ":qall!<CR>", opts)
+vim.api.nvim_set_keymap("n", "<Leader>wq", ":wqall<CR>", opts)
+vim.api.nvim_set_keymap("n", "<Leader>w", ":wall<CR>", opts)
+
 -- window navigation
 vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", opts)
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", opts)
@@ -31,55 +40,33 @@ vim.api.nvim_set_keymap("n", "±", ":res +3<CR>", opts)
 -- buffers
 vim.api.nvim_set_keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", opts)
 vim.api.nvim_set_keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opts)
-vim.api.nvim_set_keymap("n", "˙", ":BufferLineMovePrev<CR>", opts)
-vim.api.nvim_set_keymap("n", "¬", ":BufferLineMoveNext<CR>", opts)
-vim.api.nvim_set_keymap("n", "∑", ":Bdelete<CR>", opts)
-
--- nvimtree
-vim.api.nvim_set_keymap("n", "<Leader>t", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>r", ":NvimTreeRefresh<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>bc", ":Bdelete<CR>", opts)
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-    callback = function ()
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
         vim.highlight.on_yank()
     end,
     group = highlight_group,
-    pattern = '*',
+    pattern = "*",
 })
 
--- telescope
-vim.api.nvim_set_keymap(
-    "n",
-    "<leader><space>",
-    [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]],
-    opts
-)
-vim.api.nvim_set_keymap("n", "<leader>fo", [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], opts)
-vim.api.nvim_set_keymap(
-    "n",
-    "<leader>gg",
-    [[<cmd>lua require('telescope.builtin').git_files({show_untracked = false})<CR>]],
-    opts
-)
-vim.api.nvim_set_keymap("n", "<leader>fb", [[<cmd>lua require('telescope.builtin').buffers()<CR>]], opts)
-vim.api.nvim_set_keymap("n", "<leader>fh", [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], opts)
-vim.api.nvim_set_keymap(
-    "n",
-    "<leader>bz",
-    [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]],
-    opts
-)
-vim.api.nvim_set_keymap("n", "<leader>st", [[<cmd>lua require('telescope.builtin').tags()<CR>]], opts)
-vim.api.nvim_set_keymap(
-    "n",
-    "<leader>so",
-    [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]],
-    opts
-)
--- brew install fd
-vim.api.nvim_set_keymap("n", "<leader>fs", [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], opts)
--- brew install ripgrep
-vim.api.nvim_set_keymap("n", "<leader>fg", [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], opts)
+-- terminal
+vim.api.nvim_create_autocmd("TermOpen", {
+    group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
+    callback = function()
+        vim.opt.number = false
+        vim.opt.relativenumber = false
+    end,
+})
+
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true }) -- Exit terminal mode
+vim.keymap.set("n", "<Leader>st", function()
+    vim.cmd.vnew()
+    vim.cmd.term()
+    vim.cmd.wincmd("J")
+    vim.api.nvim_win_set_height(0, 25)
+    vim.bo.modifiable = true
+end)
