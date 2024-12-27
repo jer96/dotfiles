@@ -6,3 +6,4 @@
 !.warp/
 !.warp/**
 !.warp/keybindings.yaml
+!.zshrc

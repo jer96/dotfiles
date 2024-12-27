@@ -3,8 +3,8 @@ return {
     lazy = false,
     priority = 1001,
     config = function()
+        ---@diagnostic disable-next-line: missing-fields
         require("kanagawa").setup({
-            theme = "dragon",
             colors = {
                 theme = {
                     all = {
@@ -23,12 +23,6 @@ return {
                 }
             end,
         })
-        vim.o.background = ""
-        vim.cmd("colorscheme kanagawa")
-
-        local colors = require("kanagawa.colors").setup()
-        local palette_colors = colors.palette
-        vim.api.nvim_set_hl(0, "CursorLine", { bg = palette_colors.sumiInk3 })
-        vim.api.nvim_set_hl(0, "Visual", { bg = palette_colors.winterGreen, fg = "NONE", bold = true })
+        vim.cmd("colorscheme kanagawa-dragon")
     end,
 }

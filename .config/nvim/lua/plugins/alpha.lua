@@ -65,7 +65,7 @@ return {
                 "  > nvim plugins",
                 ":e ~/.config/nvim/lua/plugins | :cd %:p:h | :NvimTreeToggle <CR>"
             ),
-            dashboard.button("p", "  > nvim config", ":e ~/.config/nvim/ | :cd %:p:h | :NvimTreeToggle <CR>"),
+            dashboard.button("s", "  > nvim config", ":e ~/.config/nvim/ | :cd %:p:h | :NvimTreeToggle <CR>"),
             dashboard.button(
                 "v",
                 "  > nvim keymap",

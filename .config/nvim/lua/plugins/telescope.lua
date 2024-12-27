@@ -24,6 +24,11 @@ return {
                     "Movies",
                     "Public",
                     "Pictures",
+                    ".git",
+                    ".venv",
+                    ".cargo",
+                    ".pyenv",
+                    "quarto_files",
                 },
                 prompt_prefix = "  ",
                 selection_caret = "  ",
@@ -44,7 +49,12 @@ return {
         local builtin = require("telescope.builtin")
         local themes = require("telescope.themes")
         -- See `:help telescope.builtin`
-        vim.keymap.set("n", "<leader><space>", builtin.find_files, { desc = "find files" })
+        vim.keymap.set("n", "<leader><space>", function()
+            builtin.find_files({
+                no_ignore = true,
+                hidden = true,
+            })
+        end, { desc = "find files" })
         vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "find buffers" })
         vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "find git files" })
         vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "search help tags" })
