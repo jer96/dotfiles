@@ -1,4 +1,3 @@
--- reference: https://github.com/jmbuhr/kickstart.nvim-quarto-example
 return {
     {
         "benlubas/molten-nvim",
@@ -10,14 +9,44 @@ return {
             vim.g.molten_image_provider = "image.nvim"
             local palette = require("kanagawa.colors").setup({ theme = "wave" }).palette
             vim.api.nvim_set_hl(0, "MoltenCell", { bg = palette.sumiInk3 })
+            vim.keymap.set("v", "<leader>m", function()
+                -- Get start and end positions of the visual selection
+                local start_line = vim.fn.line("'<")
+                local end_line = vim.fn.line("'>")
+                vim.fn.MoltenEvaluateRange(start_line, end_line)
+            end)
+
+            vim.keymap.set("n", "<leader>mb", function()
+                local last_line = vim.api.nvim_buf_line_count(0)
+                vim.fn.MoltenEvaluateRange(1, last_line)
+            end)
+            vim.keymap.set("n", "<localleader>mi", ":MoltenInit<CR>", { silent = true, desc = "Initialize the plugin" })
+            vim.keymap.set(
+                "n",
+                "<localleader>me",
+                ":MoltenEvaluateOperator<CR>",
+                { silent = true, desc = "run operator selection" }
+            )
+            vim.keymap.set("n", "<localleader>rl", ":MoltenEvaluateLine<CR>", { silent = true, desc = "evaluate line" })
+            vim.keymap.set(
+                "n",
+                "<localleader>rr",
+                ":MoltenReevaluateCell<CR>",
+                { silent = true, desc = "re-evaluate cell" }
+            )
+            vim.keymap.set("n", "<localleader>rd", ":MoltenDelete<CR>", { silent = true, desc = "molten delete cell" })
+            vim.keymap.set("n", "<localleader>mh", ":MoltenHideOutput<CR>", { silent = true, desc = "hide output" })
+            vim.keymap.set(
+                "n",
+                "<localleader>mo",
+                ":noautocmd MoltenEnterOutput<CR>",
+                { silent = true, desc = "show/enter output" }
+            )
         end,
     },
-
-    { -- directly open ipynb files as quarto docuements
-        -- and convert back behind the scenes
+    {
         "GCBallesteros/jupytext.nvim",
         opts = {
-
             style = "markdown",
             output_extension = "md",
             force_ft = "markdown",
@@ -56,9 +85,69 @@ return {
             window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
         },
     },
+    {
+        "Vigemus/iron.nvim",
+        config = function()
+            local iron = require("iron.core")
+            local view = require("iron.view")
+
+            iron.setup({
+                config = {
+                    -- Whether a repl should be discarded or not
+                    scratch_repl = true,
+                    -- Your repl definitions come here
+                    repl_definition = {
+                        sh = {
+                            -- Can be a table or a function that
+                            -- returns a table (see below)
+                            command = { "zsh" },
+                        },
+                        python = {
+                            command = { "ipython", "--no-autoindent" }, -- { "python3" }
+                            format = require("iron.fts.common").bracketed_paste_python,
+                        },
+                    },
+                    repl_open_cmd = view.split.vertical.botright(0.61903398875),
+                },
+                -- Iron doesn't set keymaps by default anymore.
+                -- You can set them here or manually add keymaps to the functions in iron.core
+                keymaps = {
+                    send_motion = "<space>sc",
+                    visual_send = "<space>sc",
+                    send_file = "<space>sf",
+                    send_line = "<space>sl",
+                    send_paragraph = "<space>sp",
+                    send_until_cursor = "<space>su",
+                    send_mark = "<space>sm",
+                    mark_motion = "<space>mc",
+                    mark_visual = "<space>mc",
+                    remove_mark = "<space>md",
+                    cr = "<space>s<cr>",
+                    interrupt = "<space>s<space>",
+                    exit = "<space>sq",
+                    clear = "<space>cl",
+                },
+                -- If the highlight is on, you can change how it looks
+                -- For the available options, check nvim_set_hl
+                highlight = {
+                    italic = true,
+                },
+                ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
+            })
+
+            -- iron also has a list of commands, see :h iron-commands for all available commands
+            vim.keymap.set("n", "<space>rs", "<cmd>IronRepl<cr>")
+            vim.keymap.set("n", "<space>rr", "<cmd>IronRestart<cr>")
+            vim.keymap.set("n", "<space>rf", "<cmd>IronFocus<cr>")
+            vim.keymap.set("n", "<space>rh", "<cmd>IronHide<cr>")
+        end,
+    },
 
     {
         "quarto-dev/quarto-nvim",
+        dependencies = {
+            "jmbuhr/otter.nvim",
+        },
         ft = { "quarto" },
         dev = false,
         config = function()
@@ -84,7 +173,8 @@ return {
                 },
                 codeRunner = {
                     enabled = true,
-                    default_method = "molten",
+                    -- default_method = "molten",
+                    default_method = "iron",
                 },
             })
 
@@ -97,63 +187,7 @@ return {
             vim.keymap.set("n", "<localleader>M", function()
                 runner.run_all(true)
             end, { desc = "run all cells of all languages", silent = true })
-        end,
-        dependencies = {
-            "jmbuhr/otter.nvim",
-        },
-    },
 
-    { -- send code from python/r/qmd documets to a terminal or REPL
-        -- like ipython, R, bash
-        "jpalardy/vim-slime",
-        dev = false,
-        init = function()
-            vim.b["quarto_is_python_chunk"] = false
-            Quarto_is_in_python_chunk = function()
-                require("otter.tools.functions").is_otter_language_context("python")
-            end
-
-            vim.cmd([[
-            let g:slime_dispatch_ipython_pause = 100
-            function SlimeOverride_EscapeText_quarto(text)
-                call v:lua.Quarto_is_in_python_chunk()
-                if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk && !(exists('b:quarto_is_r_mode') && b:quarto_is_r_mode)
-                    return ["%cpaste -q\n", g:slime_dispatch_ipython_pause, a:text, "--", "\n"]
-                else
-                    if exists('b:quarto_is_r_mode') && b:quarto_is_r_mode && b:quarto_is_python_chunk
-                        return [a:text, "\n"]
-                    else
-                        return [a:text]
-                    end
-                end
-                endfunction
-                ]])
-            vim.g.slime_target = "neovim"
-            vim.g.slime_no_mappings = true
-            vim.g.slime_python_ipython = 1
-        end,
-        config = function()
-            vim.g.slime_input_pid = false
-            vim.g.slime_suggest_default = true
-            vim.g.slime_menu_config = false
-            vim.g.slime_neovim_ignore_unlisted = true
-            local function mark_terminal()
-                local job_id = vim.b.terminal_job_id
-                vim.print("job_id: " .. job_id)
-            end
-
-            local function set_terminal()
-                vim.fn.call("slime#config", {})
-            end
-            vim.keymap.set("n", "<leader>cm", mark_terminal, { desc = "[m]ark terminal" })
-            vim.keymap.set("n", "<leader>cs", set_terminal, { desc = "[s]et terminal" })
-            vim.keymap.set({ "n", "i" }, "<leader>qj", ":QuartoSend<cr>", { desc = "send code cell to terminal" })
-            vim.keymap.set(
-                { "n", "i" },
-                "<leader>qja",
-                ":QuartoSendAll<cr>",
-                { desc = "send all code cells to terminal" }
-            )
             vim.keymap.set(
                 { "n", "i" },
                 "<leader>qi",
@@ -165,7 +199,7 @@ return {
                 { "n" },
                 "<leader>qth",
                 ":split  term://ipython<cr>",
-                { desc = "[c]ode repl [i]python v split" }
+                { desc = "[c]ode repl [i]python split" }
             )
             vim.keymap.set({ "n" }, "<leader>qp", ":QuartoPreview<cr>", { desc = "open [q]uarto [p]review" })
             vim.keymap.set({ "n" }, "<leader>qcp", ":QuartoClosePreview<cr>", { desc = "[c]lose [q]uarto [p]review" })

@@ -1,7 +1,7 @@
 export EDITOR='nvim'
 export VISUAL='nvim'
 export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
-alias start-ssh='eval "$(ssh-agent -s)"; ssh-add ~/.ssh/id_ed25519'
+alias ssh_start='eval "$(ssh-agent -s)"; ssh-add ~/.ssh/id_ed25519'
 
 git_ignoreadd() {
     if [ -z "$1" ]; then
