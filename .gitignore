@@ -1,10 +1,15 @@
 *
+!*/
+
+/Library/
+.tmux/
+.local/
+.config/uv/
 
 !aerospace.toml
-!.config
-!.config/nvim
-!.config/ghostty
-!.config/tmux-powerline/
-!.config/uv
+!.config/nvim/**
+!.config/ghostty/config
+!.config/tmux-powerline/**
 !.zshrc
 !.tmux.conf
+!.oh-my-zsh/custom/**

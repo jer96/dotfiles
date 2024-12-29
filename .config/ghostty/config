@@ -1,0 +1,5 @@
+font-size = 20
+theme = Kanagawa Dragon
+cursor-style-blink = false
+# keybind = ctrl+a>-=new_split:down
+# keybind = ctrl+a>|=new_split:right
