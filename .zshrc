@@ -1,3 +1,9 @@
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="jer"
+ENABLE_CORRECTION="true"
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
+
 export EDITOR='nvim'
 export VISUAL='nvim'
 export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
@@ -20,3 +26,4 @@ eval "$(pyenv init - zsh)"
 
 export PATH="/Applications/quarto/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+

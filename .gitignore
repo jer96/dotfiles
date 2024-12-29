@@ -1,9 +1,13 @@
 *
 
 !aerospace.toml
-!.config/
-!.config/**
+!.config
+!.config/nvim
+!.config/ghostty
+!.config/tmux-powerline/
+!.config/uv
 !.warp/
 !.warp/**
 !.warp/keybindings.yaml
 !.zshrc
+!.tmux.conf

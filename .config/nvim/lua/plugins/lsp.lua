@@ -1,4 +1,4 @@
-local configure_cmp = function ()
+local configure_cmp = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     -- [[ Configure nvim-cmp ]]
@@ -6,7 +6,7 @@ local configure_cmp = function ()
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
     cmp.setup({
         snippet = {
-            expand = function (args)
+            expand = function(args)
                 luasnip.lsp_expand(args.body)
             end,
         },
@@ -19,7 +19,7 @@ local configure_cmp = function ()
             ["<CR>"] = cmp.mapping.confirm({
                 select = true,
             }),
-            ["<Tab>"] = cmp.mapping(function (fallback)
+            ["<Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
                 elseif luasnip.expand_or_locally_jumpable() then
@@ -28,7 +28,7 @@ local configure_cmp = function ()
                     fallback()
                 end
             end, { "i", "s" }),
-            ["<S-Tab>"] = cmp.mapping(function (fallback)
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
                 elseif luasnip.locally_jumpable(-1) then
@@ -85,10 +85,10 @@ return {
         "folke/neodev.nvim",
         "hrsh7th/nvim-cmp",
         "hrsh7th/cmp-nvim-lsp", -- adds LSP completion capabilities
-        "hrsh7th/cmp-path",     -- file path source for completion
-        "hrsh7th/cmp-buffer",   -- buffer source for completion
-        "petertriho/cmp-git",   -- git source for completion
-        "hrsh7th/cmp-cmdline",  -- cmd line source for completion
+        "hrsh7th/cmp-path", -- file path source for completion
+        "hrsh7th/cmp-buffer", -- buffer source for completion
+        "petertriho/cmp-git", -- git source for completion
+        "hrsh7th/cmp-cmdline", -- cmd line source for completion
         "saadparwaiz1/cmp_luasnip",
         {
             "L3MON4D3/LuaSnip",
@@ -103,14 +103,14 @@ return {
             },
         },
     },
-    config = function ()
+    config = function()
         -- Setup neovim lua configuration
         require("neodev").setup()
         local lsp_config = require("lspconfig")
 
         -- [[ Configure LSP ]]
         local lsp_zero = require("lsp-zero")
-        local default_on_attach = function (_, bufnr)
+        local default_on_attach = function(_, bufnr)
             lsp_zero.default_keymaps({ buffer = bufnr })
             local opts = { buffer = bufnr }
             local bind = vim.keymap.set
@@ -132,7 +132,7 @@ return {
             -- })
         end
 
-        lsp_zero.on_attach(function (client, bufnr)
+        lsp_zero.on_attach(function(client, bufnr)
             default_on_attach(client, bufnr)
         end)
 
@@ -172,7 +172,7 @@ return {
         })
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
-            callback = function (args)
+            callback = function(args)
                 local client = vim.lsp.get_client_by_id(args.data.client_id)
                 if client == nil then
                     return
@@ -202,7 +202,7 @@ return {
                 text = {
                     [vim.diagnostic.severity.ERROR] = " ",
                     [vim.diagnostic.severity.WARN] = " ",
-                    [vim.diagnostic.severity.HINT] = "ﯦ ",
+                    [vim.diagnostic.severity.HINT] = "󰮥 ",
                     [vim.diagnostic.severity.INFO] = " ",
                 },
             },

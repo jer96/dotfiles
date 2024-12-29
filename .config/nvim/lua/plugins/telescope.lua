@@ -9,6 +9,7 @@ return {
         require("telescope").setup({
             defaults = {
                 file_ignore_patterns = {
+                    ".oh-my-zsh/",
                     ".Trash",
                     ".DS_Store",
                     ".cache",

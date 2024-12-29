@@ -22,9 +22,9 @@ local hl_groups = {
 }
 
 local footer = function()
-    local date = os.date(" %m-%d-%Y")
+    local date = os.date("%m-%d-%Y")
     local version = vim.version()
-    local nvim_version_info = " v" .. version.major .. "." .. version.minor .. "." .. version.patch
+    local nvim_version_info = "v" .. version.major .. "." .. version.minor .. "." .. version.patch
     return date .. "  " .. nvim_version_info
 end
 
@@ -59,19 +59,15 @@ return {
         dashboard.section.footer.opts.hl = pick_random(hl_groups)
         dashboard.section.header.val = require("ascii").art.text.neovim[pick_random(headers)]
         dashboard.section.buttons.val = {
-            dashboard.button("e", "  > new file", ":ene <BAR> startinsert <CR>"),
-            dashboard.button(
-                "p",
-                "  > nvim plugins",
-                ":e ~/.config/nvim/lua/plugins | :cd %:p:h | :NvimTreeToggle <CR>"
-            ),
-            dashboard.button("s", "  > nvim config", ":e ~/.config/nvim/ | :cd %:p:h | :NvimTreeToggle <CR>"),
+            dashboard.button("e", "  > file", ":ene <BAR> startinsert <CR>"),
+            dashboard.button("p", "  > plugins", ":e ~/.config/nvim/lua/plugins | :cd %:p:h | :NvimTreeToggle <CR>"),
+            dashboard.button("s", "  > config", ":e ~/.config/nvim/ | :cd %:p:h | :NvimTreeToggle <CR>"),
             dashboard.button(
                 "v",
-                "  > nvim keymap",
+                "  > keymap",
                 ":e ~/.config/nvim/lua/config/keymaps.lua | :cd %:p:h | :NvimTreeToggle <CR>"
             ),
-            dashboard.button("P", "󰋣  > lazy sync", ":Lazy sync<CR>"),
+            dashboard.button("P", "󰋣  > lazy", ":Lazy sync<CR>"),
             dashboard.button("c", "  > .config", ":e ~/.config/ | :cd %:p:h | :NvimTreeToggle <CR>"),
             dashboard.button("z", "  > .zshrc", ":e ~/.zshrc | :cd %:p:h | :NvimTreeToggle <CR>"),
             dashboard.button("q", "󱠡  > quit", ":qa<CR>"),

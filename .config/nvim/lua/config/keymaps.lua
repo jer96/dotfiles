@@ -15,10 +15,10 @@ vim.api.nvim_set_keymap("n", "<Leader>wq", ":wqall<CR>", opts)
 vim.api.nvim_set_keymap("n", "<Leader>w", ":wall<CR>", opts)
 
 -- window navigation
-vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", opts)
-vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", opts)
-vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", opts)
-vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", opts)
+-- vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", opts)
+-- vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", opts)
+-- vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", opts)
+-- vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", opts)
 
 -- move text up and down
 -- normal mode
