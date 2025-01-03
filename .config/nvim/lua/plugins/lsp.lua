@@ -140,7 +140,6 @@ return {
         ---@diagnostic disable-next-line: missing-fields
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "pylsp",
                 "ts_ls",
                 "lua_ls",
             },
@@ -153,6 +152,17 @@ return {
             init_options = {
                 settings = {
                     logLevel = "debug",
+                },
+            },
+        })
+        lsp_config.pylsp.setup({
+            settings = {
+                pylsp = {
+                    plugins = {
+                        pycodestyle = {
+                            enabled = false,
+                        },
+                    },
                 },
             },
         })

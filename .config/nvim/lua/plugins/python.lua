@@ -1,9 +1,9 @@
 return {
 
     {
-        dir = "~/nvim-plugins/molten-nvim",
-        -- "benlubas/molten-nvim",
-        -- version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
+        -- dir = "~/nvim-plugins/molten-nvim",
+        "benlubas/molten-nvim",
+        version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
         dependencies = { "3rd/image.nvim" },
         build = ":UpdateRemotePlugins",
         init = function()

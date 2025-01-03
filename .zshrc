@@ -7,7 +7,6 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim'
 export VISUAL='nvim'
 export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
-alias ssh_start='eval "$(ssh-agent -s)"; ssh-add ~/.ssh/id_ed25519'
 
 git_ignoreadd() {
     if [ -z "$1" ]; then
@@ -26,4 +25,5 @@ eval "$(pyenv init - zsh)"
 
 export PATH="/Applications/quarto/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-
+alias nvim="$HOME/.scripts/nvim"
+alias ssh_start='eval "$(ssh-agent -s)"; ssh-add ~/.ssh/id_ed25519'

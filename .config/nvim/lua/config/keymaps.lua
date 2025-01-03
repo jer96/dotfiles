@@ -14,11 +14,8 @@ vim.api.nvim_set_keymap("n", "<Leader>qqq", ":qall!<CR>", opts)
 vim.api.nvim_set_keymap("n", "<Leader>wq", ":wqall<CR>", opts)
 vim.api.nvim_set_keymap("n", "<Leader>w", ":wall<CR>", opts)
 
--- window navigation
--- vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", opts)
--- vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", opts)
--- vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", opts)
--- vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", opts)
+-- restart neovim
+vim.api.nvim_set_keymap("n", "<Leader>rr", ":wall | :cq<CR>", opts)
 
 -- move text up and down
 -- normal mode
@@ -70,3 +67,5 @@ vim.keymap.set("n", "<Leader>st", function()
     vim.api.nvim_win_set_height(0, 25)
     vim.bo.modifiable = true
 end)
+
+vim.api.nvim_set_keymap("n", "<leader>aa", ":AgentChat<CR>", opts)
