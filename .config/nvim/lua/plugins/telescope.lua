@@ -30,6 +30,8 @@ return {
                     ".cargo",
                     ".pyenv",
                     "quarto_files",
+                    "build",
+                    "node_modules",
                 },
                 prompt_prefix = "  ",
                 selection_caret = "  ",

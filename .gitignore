@@ -2,9 +2,13 @@
 !*/
 
 /Library/
+/Downloads/
 .tmux/
 .local/
 .config/uv/
+projects/
+nvim-plugins/
+.oh-my-zsh/
 
 !aerospace.toml
 !.config/nvim/**
@@ -12,4 +16,3 @@
 !.config/tmux-powerline/**
 !.zshrc
 !.tmux.conf
-!.oh-my-zsh/custom/**
