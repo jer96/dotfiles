@@ -34,6 +34,7 @@ return {
             vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { fg = colors.palette.springViolet1, bold = true })
             vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { fg = colors.palette.boatYellow2, bold = true })
             vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { fg = colors.palette.autumnRed, bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = colors.palette.dragonBlack1 })
         end,
     },
     {

@@ -9,6 +9,8 @@
 projects/
 nvim-plugins/
 .oh-my-zsh/
+.cache/
+.tools/
 
 !aerospace.toml
 !.config/nvim/**

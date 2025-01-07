@@ -39,8 +39,7 @@ vim.api.nvim_set_keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", opts)
 vim.api.nvim_set_keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opts)
 vim.api.nvim_set_keymap("n", "<C-w>", ":Bdelete<CR>", opts)
 
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
+-- highlight on yank
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
@@ -67,5 +66,3 @@ vim.keymap.set("n", "<Leader>st", function()
     vim.api.nvim_win_set_height(0, 25)
     vim.bo.modifiable = true
 end)
-
-vim.api.nvim_set_keymap("n", "<leader>aa", ":AgentChat<CR>", opts)
