@@ -1,52 +1,67 @@
 return {
-    {
-        "stevearc/conform.nvim",
-        enabled = true,
-        config = function ()
-            require("conform").setup({
-                notify_on_error = false,
-                format_on_save = {
-                    timeout_ms = 500,
-                    lsp_fallback = true,
-                },
-                formatters_by_ft = {
-                    lua = { "mystylua" },
-                    python = { "myruff" },
-                    quarto = { "injected" },
-                },
-                formatters = {
-                    mystylua = {
-                        command = "stylua",
-                        args = { "--indent-type", "Spaces", "--indent-width", "2", "-" },
-                    },
-                    myruff = {
-                        command = "ruff format",
-                    },
-                },
+  {
+    "stevearc/conform.nvim",
+    enabled = true,
+    config = function()
+      -- Customize the "injected" formatter
+      require("conform").setup({
+        notify_on_error = false,
+        format_on_save = {
+          timeout_ms = 500,
+          lsp_fallback = true,
+        },
+        formatters_by_ft = {
+          lua = { "mystylua" },
+          python = { "myruff" },
+          quarto = { "injected" },
+        },
+        formatters = {
+          mystylua = {
+            command = "stylua",
+            args = { "--indent-type", "Spaces", "--indent-width", "2", "-" },
+          },
+          myruff = {
+            command = "ruff format",
+          },
+        },
+      })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "python",
+        callback = function()
+          vim.keymap.set("n", "<leader>ci", function()
+            vim.lsp.buf.code_action({
+              filter = function(action)
+                return action.title == "Ruff: Fix all auto-fixable problems"
+              end,
+              apply = true,
             })
-            -- Customize the "injected" formatter
-            require("conform").formatters.injected = {
-                -- Set the options field
-                options = {
-                    -- Set to true to ignore errors
-                    ignore_errors = false,
-                    -- Map of treesitter language to file extension
-                    -- A temporary file name with this extension will be generated during formatting
-                    -- because some formatters care about the filename.
-                    lang_to_ext = {
-                        bash = "sh",
-                        javascript = "js",
-                        latex = "tex",
-                        markdown = "md",
-                        python = "py",
-                        rust = "rs",
-                        typescript = "ts",
-                    },
-                    -- Map of treesitter language to formatters to use
-                    -- (defaults to the value from formatters_by_ft)
-                    lang_to_formatters = {},
-                },
-            }
+          end, { buffer = true, desc = "Auto-fix Ruff checks" })
         end,
-    },
+      })
+      -- Using null-ls/none-ls
+      require("conform").formatters.injected = {
+        -- Set the options field
+        options = {
+          -- Set to true to ignore errors
+          ignore_errors = false,
+          -- Map of treesitter language to file extension
+          -- A temporary file name with this extension will be generated during formatting
+          -- because some formatters care about the filename.
+          lang_to_ext = {
+            bash = "sh",
+            javascript = "js",
+            latex = "tex",
+            markdown = "md",
+            python = "py",
+            rust = "rs",
+            typescript = "ts",
+          },
+          -- Map of treesitter language to formatters to use
+          -- (defaults to the value from formatters_by_ft)
+          lang_to_formatters = {},
+        },
+      }
+    end,
+  },
 }
