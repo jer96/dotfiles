@@ -1,6 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="jer"
-ENABLE_CORRECTION="true"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
@@ -27,6 +26,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 alias nvim="$HOME/.scripts/nvim"
 alias vim="nvim"
 alias ssh_start='eval "$(ssh-agent -s)"; ssh-add ~/.ssh/id_ed25519'
+alias mcp-cli="npx @wong2/mcp-cli"
 
 # local .zsh config
 source $HOME/.zshrc.pvt.zsh

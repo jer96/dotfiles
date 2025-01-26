@@ -18,8 +18,8 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
--- vim.g.python3_host_prog = vim.fn.expand("~/.pyenv/shims/python")
 
+require("config.utils").set_python3_host_prog()
 require("config.settings")
 require("lazy").setup({
     spec = {
