@@ -1,5 +1,6 @@
 return {
     "dlants/magenta.nvim",
+    enabled = false,
     dev = true,
     lazy = false,
     build = "npm install --frozen-lockfile",

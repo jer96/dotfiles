@@ -1,154 +1,49 @@
-local configure_cmp = function()
-    local cmp = require("cmp")
-    local luasnip = require("luasnip")
-    -- [[ Configure nvim-cmp ]]
-    -- See `:help cmp`
-    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-    cmp.setup({
-        snippet = {
-            expand = function(args)
-                luasnip.lsp_expand(args.body)
-            end,
-        },
-        window = {
-            completion = cmp.config.window.bordered(),
-            documentation = cmp.config.window.bordered(),
-        },
-        mapping = cmp.mapping.preset.insert({
-            ["<C-p>"] = cmp.mapping.complete({}),
-            ["<CR>"] = cmp.mapping.confirm({
-                select = true,
-            }),
-            ["<Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif luasnip.expand_or_locally_jumpable() then
-                    luasnip.expand_or_jump()
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-            ["<S-Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                elseif luasnip.locally_jumpable(-1) then
-                    luasnip.jump(-1)
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-        }),
-        sources = cmp.config.sources({
-            { name = "nvim_lsp" },
-            { name = "luasnip" },
-            { name = "path" },
-            { name = "buffer" },
-        }),
-    })
-    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
-    -- Set configuration for specific filetype.
-    cmp.setup.filetype("gitcommit", {
-        sources = cmp.config.sources({
-            { name = "git" },
-            { name = "buffer" },
-        }),
-    })
-
-    -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-    cmp.setup.cmdline({ "/", "?" }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-            { name = "buffer" },
-        },
-    })
-
-    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-    cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-            { name = "path" },
-            { name = "cmdline" },
-        }),
-    })
-end
-
 return {
-    -- LSP Configuration & Plugins
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v3.x",
+    "neovim/nvim-lspconfig",
+    lazy = false,
     cond = not vim.g.started_by_firenvim,
-    dependencies = {
-        "neovim/nvim-lspconfig",
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
-        "folke/neodev.nvim",
-        "hrsh7th/nvim-cmp",
-        "hrsh7th/cmp-nvim-lsp", -- adds LSP completion capabilities
-        "hrsh7th/cmp-path", -- file path source for completion
-        "hrsh7th/cmp-buffer", -- buffer source for completion
-        "petertriho/cmp-git", -- git source for completion
-        "hrsh7th/cmp-cmdline", -- cmd line source for completion
-        "saadparwaiz1/cmp_luasnip",
-        {
-            "L3MON4D3/LuaSnip",
-            version = "v2.*",
-            build = "make install_jsregexp",
-        },
-        {
-            "windwp/nvim-autopairs",
-            opts = {
-                event = "InsertEnter",
-                check_ts = true,
-            },
-        },
-    },
+    dependencies = { "saghen/blink.cmp" },
     config = function()
-        -- Setup neovim lua configuration
-        require("neodev").setup()
         local lsp_config = require("lspconfig")
-
-        -- [[ Configure LSP ]]
-        local lsp_zero = require("lsp-zero")
+        local capabilities = require("blink.cmp").get_lsp_capabilities()
         local default_on_attach = function(_, bufnr)
-            lsp_zero.default_keymaps({ buffer = bufnr })
             local opts = { buffer = bufnr }
             local bind = vim.keymap.set
             bind("n", "<leader>ca", "<cmd>:lua vim.lsp.buf.code_action()<cr>", opts)
             bind("n", "<leader>rn", "<cmd>:lua vim.lsp.buf.rename()<cr>", opts)
             bind("n", "<leader>gr", "<cmd>:lua vim.lsp.buf.references()<cr>", opts)
             bind("n", "<leader>e", "<cmd>:lua vim.diagnostic.open_float()<cr>", opts)
-            -- vim.api.nvim_create_autocmd("BufWritePre", {
-            --     buffer = bufnr,
-            --     callback = function()
-            --         vim.lsp.buf.format({
-            --             async = false,
-            --             timeout_ms = 2000,
-            --             -- filter = function(c)
-            --             --     return c.name == "ruff"
-            --             -- end,
-            --         })
-            --     end,
-            -- })
+            bind("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+            bind("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+            bind("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+            bind("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
+            bind("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
         end
 
-        lsp_zero.on_attach(function(client, bufnr)
-            default_on_attach(client, bufnr)
-        end)
+        -- List of default servers to configure
+        local default_servers = {
+            "lua_ls",
+            "ts_ls",
+        }
 
-        require("mason").setup({})
-        ---@diagnostic disable-next-line: missing-fields
-        require("mason-lspconfig").setup({
-            ensure_installed = {
-                "ts_ls",
-                "lua_ls",
-            },
-            handlers = {
-                lsp_zero.default_setup,
-            },
-        })
+        -- Configure all default servers with the same configuration
+        for _, server in ipairs(default_servers) do
+            if server == "lua_ls" then
+                lsp_config[server].setup({
+                    on_attach = default_on_attach,
+                    capabilities = capabilities,
+                })
+            else
+                lsp_config[server].setup({
+                    on_attach = default_on_attach,
+                    capabilities = capabilities,
+                })
+            end
+        end
+
         lsp_config.ruff.setup({
             trace = "messages",
+            capabilities = capabilities,
             init_options = {
                 settings = {
                     logLevel = "debug",
@@ -177,6 +72,7 @@ return {
                     },
                 },
             },
+            capabilities = capabilities,
             on_attach = function(client, bufnr)
                 -- Disable formatting for pylsp
                 client.server_capabilities.documentFormattingProvider = false
@@ -197,7 +93,10 @@ return {
                     },
                 },
             },
+            capabilities = capabilities,
+            on_attach = default_on_attach,
         })
+
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
             callback = function(args)
@@ -235,6 +134,5 @@ return {
                 },
             },
         })
-        configure_cmp()
     end,
 }

@@ -66,3 +66,8 @@ vim.keymap.set("n", "<Leader>st", function()
     vim.api.nvim_win_set_height(0, 25)
     vim.bo.modifiable = true
 end)
+
+-- clipboard mappings using z register
+vim.api.nvim_set_keymap("x", "y", "zy", opts)
+vim.api.nvim_set_keymap("n", "p", "zp", opts)
+vim.api.nvim_set_keymap("n", "P", "zP", opts)
