@@ -11,8 +11,5 @@ return {
         vim.api.nvim_set_hl(0, "DiffDelete", { bg = colors.palette.winterRed })
         vim.api.nvim_set_hl(0, "DiffChange", { bg = colors.palette.winterBlue })
         vim.api.nvim_set_hl(0, "DiffText", { bg = colors.palette.winterYellow, blend = 40 })
-        require("diffview").setup({
-            enhanced_diff_hl = true,
-        })
     end,
 }

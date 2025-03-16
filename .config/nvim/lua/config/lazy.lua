@@ -26,5 +26,8 @@ require("lazy").setup({
         { import = "plugins" },
     },
     checker = { enabled = false },
+    dev = {
+        path = "~/nvim-plugins/",
+    },
 })
 require("config.keymaps")

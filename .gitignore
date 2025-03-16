@@ -3,6 +3,7 @@
 
 /Library/
 /Downloads/
+/Desktop/
 .tmux/
 .local/
 .config/uv/
@@ -12,6 +13,7 @@ nvim-plugins/
 .cache/
 .tools/
 .Trash/
+**/.DS_Store
 
 !aerospace.toml
 !.config/nvim/**

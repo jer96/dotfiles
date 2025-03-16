@@ -162,9 +162,27 @@ return {
                         pycodestyle = {
                             enabled = false,
                         },
+                        pyflakes = {
+                            enabled = false,
+                        },
+                        black = {
+                            enabled = false,
+                        },
+                        autopep8 = {
+                            enabled = false,
+                        },
+                        yapf = {
+                            enabled = false,
+                        },
                     },
                 },
             },
+            on_attach = function(client, bufnr)
+                -- Disable formatting for pylsp
+                client.server_capabilities.documentFormattingProvider = false
+                client.server_capabilities.documentRangeFormattingProvider = false
+                default_on_attach(client, bufnr)
+            end,
         })
         lsp_config.pyright.setup({
             settings = {

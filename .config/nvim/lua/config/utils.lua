@@ -1,4 +1,33 @@
-M = {}
+local M = {}
+
+-- Common ignored file patterns for both nvim-tree and telescope
+M.ignored_patterns = {
+    ".oh-my-zsh/",
+    ".Trash",
+    ".DS_Store",
+    ".cache",
+    ".lesshst",
+    ".npm",
+    "Applications",
+    "Desktop",
+    "Downloads",
+    "Documents",
+    "Library",
+    "Music",
+    "Movies",
+    "Public",
+    "Pictures",
+    "^.git$",
+    ".venv",
+    ".cargo",
+    ".pyenv",
+    ".CFUserTextEncoding",
+    ".local",
+    "quarto_files",
+    "build",
+    "node_modules",
+    "dist",
+}
 
 M.set_python3_host_prog = function()
     -- Check for virtual environment

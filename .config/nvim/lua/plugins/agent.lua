@@ -1,6 +1,7 @@
 return {
     {
         dir = "~/nvim-plugins/agent.nvim",
+        enabled = true,
         dev = true,
         build = ":UpdateRemotePlugins",
         dependencies = {

@@ -15,56 +15,42 @@ return {
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
-    opts = {
-        disable_netrw = true,
-        git = {
-            ignore = false,
-        },
-        filters = {
-            custom = {
-                "^.git$",
-                ".CFUserTextEncoding",
-                ".Trash",
-                ".DS_Store",
-                ".cache",
-                ".local",
-                ".lesshst",
-                ".npm",
-                "Applications",
-                "Desktop",
-                "Downloads",
-                "Documents",
-                "Library",
-                "Music",
-                "Movies",
-                "Public",
-                "Pictures",
+    opts = function()
+        local utils = require("config.utils")
+        return {
+            disable_netrw = true,
+            git = {
+                ignore = false,
+                timeout = 800,
             },
-        },
-        renderer = {
-            root_folder_label = ":t",
-            icons = {
-                show = {
-                    file = true,
-                    folder = true,
-                    folder_arrow = true,
-                    git = true,
+            filters = {
+                custom = utils.ignored_patterns,
+            },
+            renderer = {
+                root_folder_label = ":t",
+                icons = {
+                    show = {
+                        file = true,
+                        folder = true,
+                        folder_arrow = true,
+                        git = true,
+                    },
                 },
             },
-        },
-        view = {
-            adaptive_size = true,
-            width = 30,
-        },
-        actions = {
-            open_file = {
-                quit_on_open = true,
+            view = {
+                adaptive_size = true,
+                width = 30,
             },
-        },
-        filesystem_watchers = {
-            enable = true,
-        },
-    },
+            actions = {
+                open_file = {
+                    quit_on_open = true,
+                },
+            },
+            filesystem_watchers = {
+                enable = true,
+            },
+        }
+    end,
     keys = {
         { "<leader>t", "<cmd>NvimTreeToggle<CR>", desc = "Toggle file explorer" },
         { "<leader>r", "<cmd>NvimTreeRefresh<CR>", desc = "Refresh file explorer" },
