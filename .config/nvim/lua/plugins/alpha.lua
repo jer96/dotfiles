@@ -60,16 +60,12 @@ return {
         dashboard.section.header.val = require("ascii").art.text.neovim[pick_random(headers)]
         dashboard.section.buttons.val = {
             dashboard.button("e", "  > file", ":ene <BAR> startinsert <CR>"),
-            dashboard.button("p", "  > plugins", ":e ~/.config/nvim/lua/plugins | :cd %:p:h | :NvimTreeToggle <CR>"),
-            dashboard.button("s", "  > config", ":e ~/.config/nvim/ | :cd %:p:h | :NvimTreeToggle <CR>"),
-            dashboard.button(
-                "v",
-                "  > keymap",
-                ":e ~/.config/nvim/lua/config/keymaps.lua | :cd %:p:h | :NvimTreeToggle <CR>"
-            ),
+            dashboard.button("p", "  > plugins", ":e ~/.config/nvim/lua/plugins | :cd %:p:h <CR>"),
+            dashboard.button("s", "  > config", ":e ~/.config/nvim/ | :cd %:p:h <CR>"),
+            dashboard.button("v", "  > keymap", ":e ~/.config/nvim/lua/config/keymaps.lua | :cd %:p:h <CR>"),
             dashboard.button("P", "󰋣  > lazy", ":Lazy sync<CR>"),
-            dashboard.button("c", "  > .config", ":e ~/.config/ | :cd %:p:h | :NvimTreeToggle <CR>"),
-            dashboard.button("z", "  > .zshrc", ":e ~/.zshrc | :cd %:p:h | :NvimTreeToggle <CR>"),
+            dashboard.button("c", "  > .config", ":e ~/.config/ | :cd %:p:h <CR>"),
+            dashboard.button("z", "  > .zshrc", ":e ~/.zshrc | :cd %:p:h <CR>"),
             dashboard.button("q", "󱠡  > quit", ":qa<CR>"),
         }
         -- disable folding on alpha buffer

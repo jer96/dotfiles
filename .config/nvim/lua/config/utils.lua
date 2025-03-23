@@ -18,6 +18,7 @@ M.ignored_patterns = {
     "Public",
     "Pictures",
     "^.git$",
+    ".git/",
     ".venv",
     ".cargo",
     ".pyenv",

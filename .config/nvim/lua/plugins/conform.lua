@@ -34,6 +34,7 @@ return {
                     lua = { "mystylua" },
                     python = { "myruff" },
                     quarto = { "injected" },
+                    json = { "prettier" },
                     typescript = { "prettier" },
                     javascript = { "prettier" },
                 },

@@ -13,6 +13,7 @@ nvim-plugins/
 .cache/
 .tools/
 .Trash/
+.DS_Store
 **/.DS_Store
 
 !aerospace.toml

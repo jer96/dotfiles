@@ -5,27 +5,90 @@ return {
     ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
-        explorer = { enabled = true },
         input = { enabled = true },
-        notifier = {
-            enabled = true,
-            timeout = 3000,
-        },
-        picker = { enabled = true },
         quickfile = { enabled = true },
         scope = { enabled = true },
         styles = {
             notification = {},
         },
+        explorer = {
+            enabled = true,
+            replace_netrw = true,
+        },
+        notifier = {
+            enabled = false,
+            timeout = 3000,
+        },
+        picker = {
+            enabled = true,
+            sources = {
+                explorer = {
+                    git_status = false,
+                    git_status_open = false,
+                    git_untracked = false,
+                    diagnostics = false,
+                    diagnostics_open = false,
+                    win = {
+                        list = {
+                            keys = {
+                                ["o"] = "confirm",
+                            },
+                        },
+                    },
+                },
+            },
+        },
     },
     keys = {
-        -- Top Pickers & Explorer
+        -- Pickers & Explorer
         {
-            "<leader>,",
+            "<leader>t",
+            function()
+                Snacks.picker.explorer()
+            end,
+            desc = "Tree",
+        },
+        {
+            "<leader><leader>",
+            function()
+                Snacks.picker.smart()
+            end,
+            desc = "Files",
+        },
+        {
+            "<leader>fo",
+            function()
+                Snacks.picker.recent()
+            end,
+            desc = "Recent",
+        },
+        {
+            "<leader>b",
             function()
                 Snacks.picker.buffers()
             end,
             desc = "Buffers",
+        },
+        {
+            "<leader>gf",
+            function()
+                Snacks.picker.git_files()
+            end,
+            desc = "Git files",
+        },
+        {
+            "<leader>fg",
+            function()
+                Snacks.picker.grep()
+            end,
+            desc = "Grep",
+        },
+        {
+            "<leader>fh",
+            function()
+                Snacks.picker.help()
+            end,
+            desc = "Help",
         },
         {
             "<leader>:",
@@ -42,32 +105,11 @@ return {
             desc = "Notification History",
         },
         {
-            "<leader>e",
-            function()
-                Snacks.explorer()
-            end,
-            desc = "File Explorer",
-        },
-        {
             "<leader>fc",
             function()
                 Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
             end,
             desc = "Find Config File",
-        },
-        {
-            "<leader>fp",
-            function()
-                Snacks.picker.projects()
-            end,
-            desc = "Projects",
-        },
-        {
-            "<leader>fr",
-            function()
-                Snacks.picker.recent()
-            end,
-            desc = "Recent",
         },
         -- git
         {
@@ -130,32 +172,11 @@ return {
             desc = "Command History",
         },
         {
-            "<leader>sC",
-            function()
-                Snacks.picker.commands()
-            end,
-            desc = "Commands",
-        },
-        {
             "<leader>sd",
             function()
                 Snacks.picker.diagnostics()
             end,
             desc = "Diagnostics",
-        },
-        {
-            "<leader>sD",
-            function()
-                Snacks.picker.diagnostics_buffer()
-            end,
-            desc = "Buffer Diagnostics",
-        },
-        {
-            "<leader>sH",
-            function()
-                Snacks.picker.highlights()
-            end,
-            desc = "Highlights",
         },
         {
             "<leader>si",
@@ -165,39 +186,11 @@ return {
             desc = "Icons",
         },
         {
-            "<leader>sj",
-            function()
-                Snacks.picker.jumps()
-            end,
-            desc = "Jumps",
-        },
-        {
             "<leader>sk",
             function()
                 Snacks.picker.keymaps()
             end,
             desc = "Keymaps",
-        },
-        {
-            "<leader>sm",
-            function()
-                Snacks.picker.marks()
-            end,
-            desc = "Marks",
-        },
-        {
-            "<leader>sq",
-            function()
-                Snacks.picker.qflist()
-            end,
-            desc = "Quickfix List",
-        },
-        {
-            "<leader>sR",
-            function()
-                Snacks.picker.resume()
-            end,
-            desc = "Resume",
         },
         {
             "<leader>su",
@@ -228,14 +221,14 @@ return {
             desc = "Notification History",
         },
         {
-            "<leader>bd",
+            "<C-w>",
             function()
                 Snacks.bufdelete()
             end,
             desc = "Delete Buffer",
         },
         {
-            "<leader>cR",
+            "<leader>cr",
             function()
                 Snacks.rename.rename_file()
             end,

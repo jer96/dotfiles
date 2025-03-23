@@ -14,9 +14,9 @@ return {
             bind("n", "<leader>gr", "<cmd>:lua vim.lsp.buf.references()<cr>", opts)
             bind("n", "<leader>e", "<cmd>:lua vim.diagnostic.open_float()<cr>", opts)
             bind("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+            bind("n", "gd", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
             bind("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
             bind("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-            bind("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
             bind("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
         end
 
@@ -28,17 +28,10 @@ return {
 
         -- Configure all default servers with the same configuration
         for _, server in ipairs(default_servers) do
-            if server == "lua_ls" then
-                lsp_config[server].setup({
-                    on_attach = default_on_attach,
-                    capabilities = capabilities,
-                })
-            else
-                lsp_config[server].setup({
-                    on_attach = default_on_attach,
-                    capabilities = capabilities,
-                })
-            end
+            lsp_config[server].setup({
+                on_attach = default_on_attach,
+                capabilities = capabilities,
+            })
         end
 
         lsp_config.ruff.setup({

@@ -17,17 +17,6 @@ vim.api.nvim_set_keymap("n", "<Leader>w", ":wall<CR>", opts)
 -- restart neovim
 vim.api.nvim_set_keymap("n", "<Leader>rr", ":wall | :cq<CR>", opts)
 
--- move text up and down
--- normal mode
-vim.api.nvim_set_keymap("n", "∆", "<Esc>:m .+1<CR>==", opts)
-vim.api.nvim_set_keymap("n", "˚", "<Esc>:m .-2<CR>==", opts)
--- visual mode
-vim.api.nvim_set_keymap("v", "∆", ":m .+1<CR>==", opts)
-vim.api.nvim_set_keymap("v", "˚", ":m .-2<CR>==", opts)
--- visual block
-vim.api.nvim_set_keymap("x", "∆", ":move '>+1<CR>gv-gv", opts)
-vim.api.nvim_set_keymap("x", "˚", ":move '<-2<CR>gv-gv", opts)
-
 -- increase/decrease window size
 vim.api.nvim_set_keymap("n", "–", ":vert res -3<CR>", opts)
 vim.api.nvim_set_keymap("n", "≠", ":vert res +3<CR>", opts)
@@ -37,7 +26,6 @@ vim.api.nvim_set_keymap("n", "±", ":res +3<CR>", opts)
 -- buffers
 vim.api.nvim_set_keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", opts)
 vim.api.nvim_set_keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opts)
-vim.api.nvim_set_keymap("n", "<C-w>", ":Bdelete<CR>", opts)
 
 -- highlight on yank
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
